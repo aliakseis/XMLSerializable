@@ -42,9 +42,9 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::endDocument( void)
         
         
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::startPrefixMapping( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -52,7 +52,7 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::startPrefixMapping(
         
         
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::endPrefixMapping( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -61,11 +61,11 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::endPrefixMapping(
 
         
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::startElement( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
             /* [in] */ ISAXAttributes *)
 {
@@ -74,18 +74,18 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::startElement(
         
        
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::endElement( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
 }
         
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::characters( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -93,7 +93,7 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::characters(
         
 
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::ignorableWhitespace( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -101,9 +101,9 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::ignorableWhitespace(
         
 
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::processingInstruction( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -111,7 +111,7 @@ HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::processingInstruction(
         
         
 HRESULT STDMETHODCALLTYPE CSAXContentHandlerImpl::skippedEntity( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;

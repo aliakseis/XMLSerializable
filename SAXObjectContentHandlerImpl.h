@@ -14,31 +14,31 @@ public:
 
 protected:
     virtual HRESULT STDMETHODCALLTYPE startElement( 
-        /* [in] */ wchar_t *pwchNamespaceUri,
+        /* [in] */ unsigned short *pwchNamespaceUri,
         /* [in] */ int cchNamespaceUri,
-        /* [in] */ wchar_t *pwchLocalName,
+        /* [in] */ unsigned short *pwchLocalName,
         /* [in] */ int cchLocalName,
-        /* [in] */ wchar_t *pwchRawName,
+        /* [in] */ unsigned short *pwchRawName,
         /* [in] */ int cchRawName,
-        /* [in] */ ISAXAttributes *pAttributes);
+        /* [in] */ ISAXAttributes *pAttributes) override;
     
     virtual HRESULT STDMETHODCALLTYPE endElement( 
-        /* [in] */ wchar_t *pwchNamespaceUri,
+        /* [in] */ unsigned short *pwchNamespaceUri,
         /* [in] */ int cchNamespaceUri,
-        /* [in] */ wchar_t *pwchLocalName,
+        /* [in] */ unsigned short *pwchLocalName,
         /* [in] */ int cchLocalName,
-        /* [in] */ wchar_t *pwchRawName,
-        /* [in] */ int cchRawName);
+        /* [in] */ unsigned short *pwchRawName,
+        /* [in] */ int cchRawName) override;
     
     virtual HRESULT STDMETHODCALLTYPE characters( 
-        /* [in] */ wchar_t *pwchChars,
-        /* [in] */ int cchChars);
+        /* [in] */ unsigned short *pwchChars,
+        /* [in] */ int cchChars) override;
 
 	virtual HRESULT STDMETHODCALLTYPE processingInstruction( 
-            /* [in] */ wchar_t *pwchTarget,
+            /* [in] */ unsigned short *pwchTarget,
             /* [in] */ int cchTarget,
-            /* [in] */ wchar_t *pwchData,
-            /* [in] */ int cchData);
+            /* [in] */ unsigned short *pwchData,
+            /* [in] */ int cchData) override;
 
 private:
 	typedef std::map<std::wstring, CXmlSerializable*> CMapObjects;

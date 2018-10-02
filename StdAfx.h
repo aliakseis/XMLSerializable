@@ -15,13 +15,6 @@
 #define STRICT
 #endif
 
-// Modify the following defines if you have to target a platform prior to the ones specified below.
-// Refer to MSDN for the latest info on corresponding values for different platforms.
-#ifndef WINVER				// Allow use of features specific to Windows 95 and Windows NT 4 or later.
-#define WINVER 0x0400		// Change this to the appropriate value to target Windows 98 and Windows 2000 or later.
-#endif
-
-
 
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
@@ -34,9 +27,8 @@
 using namespace MSXML;
 
 #include <atlbase.h>
+#include <atlstr.h>
 
-
-#pragma warning(push, 3)
 
 #include <vector>
 #include <map>
@@ -46,7 +38,6 @@ using namespace MSXML;
 #include <iostream>
 #include <algorithm>
 
-#pragma warning(pop)
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

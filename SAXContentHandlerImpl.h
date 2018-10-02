@@ -16,17 +16,17 @@ public:
     CSAXContentHandlerImpl();
     virtual ~CSAXContentHandlerImpl();
 
-	virtual ULONG STDMETHODCALLTYPE AddRef()
+	virtual ULONG STDMETHODCALLTYPE AddRef()  override
 	{
 		return 1;
 	}
 
-	virtual ULONG STDMETHODCALLTYPE Release()
+	virtual ULONG STDMETHODCALLTYPE Release() override
 	{
 		return 1;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID& rGuid, void** ppOut)
+	virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID& rGuid, void** ppOut) override
 	{
 		if (NULL == ppOut)
 			return E_POINTER;
@@ -48,56 +48,56 @@ public:
 
 protected:
     virtual HRESULT STDMETHODCALLTYPE putDocumentLocator( 
-        /* [in] */ ISAXLocator *pLocator);
+        /* [in] */ ISAXLocator *pLocator)  override;
     
-    virtual HRESULT STDMETHODCALLTYPE startDocument( void);
+    virtual HRESULT STDMETHODCALLTYPE startDocument( void)  override;
     
-    virtual HRESULT STDMETHODCALLTYPE endDocument( void);
+    virtual HRESULT STDMETHODCALLTYPE endDocument( void)  override;
     
     virtual HRESULT STDMETHODCALLTYPE startPrefixMapping( 
-        /* [in] */ wchar_t *pwchPrefix,
+        /* [in] */ unsigned short *pwchPrefix,
         /* [in] */ int cchPrefix,
-        /* [in] */ wchar_t *pwchUri,
-        /* [in] */ int cchUri);
+        /* [in] */ unsigned short *pwchUri,
+        /* [in] */ int cchUri)  override;
     
     virtual HRESULT STDMETHODCALLTYPE endPrefixMapping( 
-        /* [in] */ wchar_t *pwchPrefix,
-        /* [in] */ int cchPrefix);
+        /* [in] */ unsigned short *pwchPrefix,
+        /* [in] */ int cchPrefix)  override;
     
     virtual HRESULT STDMETHODCALLTYPE startElement( 
-        /* [in] */ wchar_t *pwchNamespaceUri,
+        /* [in] */ unsigned short *pwchNamespaceUri,
         /* [in] */ int cchNamespaceUri,
-        /* [in] */ wchar_t *pwchLocalName,
+        /* [in] */ unsigned short *pwchLocalName,
         /* [in] */ int cchLocalName,
-        /* [in] */ wchar_t *pwchRawName,
+        /* [in] */ unsigned short *pwchRawName,
         /* [in] */ int cchRawName,
-        /* [in] */ ISAXAttributes *pAttributes);
+        /* [in] */ ISAXAttributes *pAttributes)  override;
     
     virtual HRESULT STDMETHODCALLTYPE endElement( 
-        /* [in] */ wchar_t *pwchNamespaceUri,
+        /* [in] */ unsigned short *pwchNamespaceUri,
         /* [in] */ int cchNamespaceUri,
-        /* [in] */ wchar_t *pwchLocalName,
+        /* [in] */ unsigned short *pwchLocalName,
         /* [in] */ int cchLocalName,
-        /* [in] */ wchar_t *pwchRawName,
+        /* [in] */ unsigned short *pwchRawName,
         /* [in] */ int cchRawName);
     
     virtual HRESULT STDMETHODCALLTYPE characters( 
-        /* [in] */ wchar_t *pwchChars,
-        /* [in] */ int cchChars);
+        /* [in] */ unsigned short *pwchChars,
+        /* [in] */ int cchChars)  override;
     
     virtual HRESULT STDMETHODCALLTYPE ignorableWhitespace( 
-        /* [in] */ wchar_t *pwchChars,
-        /* [in] */ int cchChars);
+        /* [in] */ unsigned short *pwchChars,
+        /* [in] */ int cchChars)  override;
     
     virtual HRESULT STDMETHODCALLTYPE processingInstruction( 
-        /* [in] */ wchar_t *pwchTarget,
+        /* [in] */ unsigned short *pwchTarget,
         /* [in] */ int cchTarget,
-        /* [in] */ wchar_t *pwchData,
-        /* [in] */ int cchData);
+        /* [in] */ unsigned short *pwchData,
+        /* [in] */ int cchData)  override;
     
     virtual HRESULT STDMETHODCALLTYPE skippedEntity( 
-        /* [in] */ wchar_t *pwchName,
-        /* [in] */ int cchName);
+        /* [in] */ unsigned short *pwchName,
+        /* [in] */ int cchName)  override;
 
 };
 

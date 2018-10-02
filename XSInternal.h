@@ -53,11 +53,8 @@ inline bool Convert(const wchar_t* pwsz, size_t nLength, GUID& out)
 template<>
 inline bool Convert(const wchar_t* pwsz, size_t nLength, std::string& out)
 {
-	//CAtlStringA buf(pwsz, (int)nLength);
-	//out.assign(buf, buf.GetLength());
-	std::wstring buf(pwsz, (int)nLength);
-	USES_CONVERSION;
-	out = W2CA(buf.c_str());
+	CAtlStringA buf(pwsz, (int)nLength);
+	out.assign(buf, buf.GetLength());
 	return true;
 }
 
@@ -72,9 +69,7 @@ inline bool Convert(const wchar_t* pwsz, size_t nLength, std::wstring& out)
 inline std::wostream& 
 operator <<(std::wostream& s, const std::string& rstr)
 {
-//	return s << static_cast<LPCWSTR>(CAtlStringW(rstr.c_str(), (int)rstr.length()));
-	USES_CONVERSION;
-	return s << A2CW(rstr.c_str());
+	return s << static_cast<LPCWSTR>(CAtlStringW(rstr.c_str(), (int)rstr.length()));
 }
 
 

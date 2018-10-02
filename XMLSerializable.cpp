@@ -111,8 +111,7 @@ int main(int /*argc*/, char* /*argv[]*/)
 
 	std::wostringstream ostr;
 	customersList.ToXml(ostr);
-	USES_CONVERSION;
-	std::cout << W2CA(ostr.str().c_str());
-	
+	std::wcout << ostr.str();
+
 	return 0;
 }

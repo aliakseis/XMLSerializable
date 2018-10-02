@@ -25,11 +25,11 @@ CSAXObjectContentHandlerImpl::~CSAXObjectContentHandlerImpl()
 
 
 HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *pwchLocalName,
+            /* [in] */ unsigned short *pwchLocalName,
             /* [in] */ int cchLocalName,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
             /* [in] */ ISAXAttributes *pAttributes)
 {
@@ -37,7 +37,7 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement(
 
 	if (m_stObjects.empty())
 	{
-		std::wstring strLocalName(pwchLocalName, cchLocalName);
+		std::wstring strLocalName(pwchLocalName, pwchLocalName + cchLocalName);
 		CMapObjects::iterator iter = m_mapRootObjects.find(strLocalName);
 		if (iter != m_mapRootObjects.end())
 			pObject = iter->second;
@@ -52,7 +52,7 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement(
 			if (pMetaInfo != NULL)
 			{
 				STRING_DATA stringData;
-				stringData.pwsz = pwchLocalName;
+				stringData.pwsz = (const wchar_t*) pwchLocalName;
 				stringData.nLength = cchLocalName;
 
 				ADD_OBJ_FUNC_PAIR* pEnd
@@ -80,7 +80,7 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement(
 			{
 				STRING_DATA stringData = {0};
 				RETURN_FAILED_HR(pAttributes->getLocalName(
-					i, const_cast<wchar_t**>(&stringData.pwsz), &stringData.nLength));
+					i, (unsigned short**)&stringData.pwsz, &stringData.nLength));
 
 				SET_DATA_FUNC_PAIR* pEnd 
 					= pMetaInfo->m_pSetDataFunc + pMetaInfo->m_nSetDataFuncSize;
@@ -88,10 +88,10 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement(
 					= std::find(pMetaInfo->m_pSetDataFunc, pEnd, stringData);
 				if (pFind != pEnd)
 				{
-					wchar_t *pwchValue = NULL;
+					unsigned short *pwchValue = NULL;
 					int cchValue = 0;
 					RETURN_FAILED_HR(pAttributes->getValue(i, &pwchValue, &cchValue));
-					if (!pFind->second(pObject, pwchValue, cchValue))
+					if (!pFind->second(pObject, (const wchar_t*) pwchValue, cchValue))
 					{
 						return DISP_E_TYPEMISMATCH;
 					}
@@ -107,11 +107,11 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::startElement(
         
        
 HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::endElement( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int ,
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
 	if (m_stObjPushedFlags.top())
@@ -122,7 +122,7 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::endElement(
 }
         
 HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::characters( 
-            /* [in] */ wchar_t *,
+            /* [in] */ unsigned short *,
             /* [in] */ int )
 {
     return S_OK;
@@ -137,9 +137,9 @@ const wchar_t wszMSSQLError[] = L"MSSQLError";
 const wchar_t wszHResult[] = L"HResult=\"0x";
 
 HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::processingInstruction( 
-            /* [in] */ wchar_t *pwchTarget,
+            /* [in] */ unsigned short *pwchTarget,
             /* [in] */ int cchTarget,
-            /* [in] */ wchar_t *pwchData,
+            /* [in] */ unsigned short *pwchData,
             /* [in] */ int cchData)
 {
 	//MSSQLError
@@ -149,7 +149,7 @@ HRESULT STDMETHODCALLTYPE CSAXObjectContentHandlerImpl::processingInstruction(
 		if (cchData > sizeof(wszHResult) / sizeof(wszHResult[0]) - 1 
 			&& !memcmp(wszHResult, pwchData, sizeof(wszHResult) - sizeof(wchar_t)))
 		{
-			HRESULT hr = wcstoul(pwchData + sizeof(wszHResult) / sizeof(wszHResult[0]) - 1, NULL, 16);
+			HRESULT hr = wcstoul((const wchar_t*)pwchData + sizeof(wszHResult) / sizeof(wszHResult[0]) - 1, NULL, 16);
 			if (FAILED(hr))
 				return hr;
 		}
