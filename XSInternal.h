@@ -238,7 +238,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
             return ReadField(pObj, static_cast<TheClass*>(pObj)->m_##name       \
                 , pwszData, nLength);                                           \
         }                                                                       \
-        template<int id> struct CDescriptor<id, __LINE__>                       \
+        template<int id> struct CDescriptor<id, __COUNTER__-ID_REFERENCE_POINT> \
         {                                                                       \
             enum                                                                \
             {                                                                   \
@@ -276,7 +276,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
             auto& v = static_cast<TheClass*>(pObj)->m_v##name;                  \
             return Append(pObj, v);                                             \
         }                                                                       \
-        template<int id> struct CDescriptor<id, __LINE__>                       \
+        template<int id> struct CDescriptor<id, __COUNTER__-ID_REFERENCE_POINT> \
         {                                                                       \
             enum                                                                \
             {                                                                   \
@@ -306,6 +306,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
 #define BEGIN_META_MAP(classname)                                               \
         template<int id, int> friend struct CDescriptor;                        \
     private:                                                                    \
+        enum { ID_REFERENCE_POINT = __COUNTER__ };                              \
         typedef classname TheClass;                                             \
         template<int id, int=id> struct CDescriptor                             \
         {                                                                       \
@@ -329,7 +330,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
                 CDescriptor<id-1>::SaveElements(pObj, s);                       \
             }                                                                   \
         };                                                                      \
-        template<int id> struct CDescriptor<id, __LINE__>                       \
+        template<int id> struct CDescriptor<id, 0>                              \
         {                                                                       \
             enum                                                                \
             {                                                                   \
@@ -343,7 +344,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
 
 #define END_META_MAP                                                            \
     private:                                                                    \
-        typedef CDescriptor<__LINE__-1> CFinalDescr;                            \
+        typedef CDescriptor<__COUNTER__ - ID_REFERENCE_POINT - 1> CFinalDescr;  \
         struct CFinalMetaInfo : public CMetaInfo                                \
         , public CMetaInfoData<CFinalMetaInfo, CFinalDescr::ESetDataFuncPos + 1>\
         , public CMetaInfoObj<CFinalMetaInfo, CFinalDescr::EAddObjFuncPos + 1>  \
