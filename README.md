@@ -39,10 +39,10 @@ class CCustomersList : public CXmlSerializable
 
 Microsoft SAX parser implementation is used here to read XML. The META_PROP and META_OBJECTS macros assemble mapping arrays of helper methods for the parser content handler and the bodies of the objects ToXml() methods.
 
-One small challenge here was finding a way to assemble something like a linked list at compile time to glue properties declarations together. The solution found is to use templatized inner classes along with the \_\_COUNTER__ macro (this code is a part of the META_PROP macro, back slashes at the row ends are omitted here, all the \_\_COUNTER__ values are equal inside each META_PROP or META_OBJECTS macro):
+One small challenge here was finding a way to assemble something like a linked list at compile time to glue properties declarations together. The solution found is to use templatized inner classes along with the \_\_LINE__ macro (this code is a part of the META_PROP macro, back slashes at the row ends are omitted here, all the \_\_LINE__ values are equal inside each META_PROP or META_OBJECTS macro):
 
 <pre>
-template&lt;int id> struct CDescriptor&lt;id, __COUNTER__>
+template&lt;int id> struct CDescriptor&lt;id, __LINE__>
 {
    enum
    {
