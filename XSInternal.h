@@ -220,12 +220,11 @@ public:
 };
 
 template<typename T>
-inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
+inline T* Append(std::deque<T>& v)
 {
     size_t nSize = v.size();                                            
     v.resize(nSize + 1);                                            
     T* pChild = &v[nSize];
-    pChild->SetParent(pParent);
     return pChild;
 }
 
@@ -274,7 +273,7 @@ inline T* Append(CXmlSerializable* pParent, std::deque<T>& v)
         static CXmlSerializable* ClassAddNew##name(CXmlSerializable* pObj)      \
         {                                                                       \
             auto& v = static_cast<TheClass*>(pObj)->m_v##name;                  \
-            return Append(pObj, v);                                             \
+            return Append(v);                                                   \
         }                                                                       \
         template<int id> struct CDescriptor<id, __COUNTER__-ID_REFERENCE_POINT> \
         {                                                                       \

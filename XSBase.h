@@ -25,18 +25,12 @@ class CXmlSerializable
 friend class CSAXObjectContentHandlerImpl;
 
 public:
-    CXmlSerializable() : m_pParent(NULL) {}
     virtual ~CXmlSerializable() {}
-
-    void SetParent(CXmlSerializable* pParent) { m_pParent = pParent; }
-    const CXmlSerializable* GetParent() const { return m_pParent; }
 
     virtual void ToXml(std::wostream&, LPCWSTR /*pwszRoot*/ = NULL) const {}
 
 private:
     virtual const CMetaInfo* GetMetaInfo() const { return NULL; }
-
-    CXmlSerializable* m_pParent;
 };
 
 
