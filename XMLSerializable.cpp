@@ -49,35 +49,35 @@ class CCustomersList : public CXmlSerializable
 // Listing 9.4
 // http://www.informit.com/articles/article.asp?p=99813
 const WCHAR g_pszXml[] =
-	L"<ROOT>"
-	L"<Customers CustomerID='ALFKI' ContactName='Maria Anders'>"
-	L"   <Orders ShipCity='Berlin' EmployeeName='Michael Suyama'>"
-	L"     <Employees />"
-	L"   </Orders>"
-	L"   <Orders ShipCity='Berlin' EmployeeName='Margaret Peacock'>"
-	L"     <Employees Region='WA' />"
-	L"     <Employees Region='WA' />"
-	L"   </Orders>"
-	L"   <Orders ShipCity='Berlin' EmployeeName='Nancy Davolio'>"
-	L"     <Employees Region='WA' />"
-	L"     <Employees Region='WA' />"
-	L"   </Orders>"
-	L"   <Orders ShipCity='Berlin' EmployeeName='Janet Leverling'>"
-	L"     <Employees Region='WA' />"
-	L"   </Orders>"
-	L"</Customers>"
-	L"<Customers CustomerID='TRAIH' ContactName='Helvetius Nagy'>"
-	L"   <Orders ShipCity='Kirkland' EmployeeName='Margaret Peacock'>"
-	L"     <Employees Region='WA' />"
-	L"   </Orders>"
-	L"   <Orders ShipCity='Kirkland' EmployeeName='Anne Dodsworth'>"
-	L"     <Employees />"
-	L"   </Orders>"
-	L"   <Orders ShipCity='Kirkland' EmployeeName='Michael Suyama'>"
-	L"     <Employees />"
-	L"   </Orders>"
-	L"</Customers>"
-	L"</ROOT>";
+LR"(<ROOT>
+<Customers CustomerID='ALFKI' ContactName='Maria Anders'>
+   <Orders ShipCity='Berlin' EmployeeName='Michael Suyama'>
+     <Employees />
+   </Orders>
+   <Orders ShipCity='Berlin' EmployeeName='Margaret Peacock'>
+     <Employees Region='WA' />
+     <Employees Region='WA' />
+   </Orders>
+   <Orders ShipCity='Berlin' EmployeeName='Nancy Davolio'>
+     <Employees Region='WA' />
+     <Employees Region='WA' />
+   </Orders>
+   <Orders ShipCity='Berlin' EmployeeName='Janet Leverling'>
+     <Employees Region='WA' />
+   </Orders>
+</Customers>
+<Customers CustomerID='TRAIH' ContactName='Helvetius Nagy'>
+   <Orders ShipCity='Kirkland' EmployeeName='Margaret Peacock'>
+     <Employees Region='WA' />
+   </Orders>
+   <Orders ShipCity='Kirkland' EmployeeName='Anne Dodsworth'>
+     <Employees />
+   </Orders>
+   <Orders ShipCity='Kirkland' EmployeeName='Michael Suyama'>
+     <Employees />
+   </Orders>
+</Customers>
+</ROOT>)";
 
 class CComUsageScope
 {
