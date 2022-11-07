@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <utility>
+
 #ifdef XS_BASE
 #define XS_API __declspec(dllexport)
 #else
@@ -34,20 +36,6 @@ private:
 };
 
 
-template<typename T> struct PROP_TYPE_TRAITS 
-{ 
-    typedef const T& TSetterArg; 
-    typedef T TGetterReturn; 
-};
-
-
-template<> struct PROP_TYPE_TRAITS<CSTLString> 
-{ 
-    typedef LPCTSTR TSetterArg; 
-    typedef CSTLString TGetterReturn; 
-};
-
-
 #ifdef XS_BASE
 
 #include "XSInternal.h"
@@ -68,13 +56,13 @@ template<> struct PROP_TYPE_TRAITS<CSTLString>
 
 #define PROP_GETTER(type, name)                                             \
     public:                                                                 \
-        PROP_TYPE_TRAITS<type >::TGetterReturn Get_##name() const           \
-        { return m_##name; }                                                
+        type Get_##name() const                                             \
+        { return m_##name; }
 
 #define PROP_SETTER(type, name)                                             \
     public:                                                                 \
-        void Set_##name(PROP_TYPE_TRAITS<type >::TSetterArg value)          \
-        { m_##name = value; }                                                
+        void Set_##name(type value)                                         \
+        { m_##name = std::move(value); }
 
 #define META_PROP_READONLY(type, name)                                      \
     private:                                                                \
