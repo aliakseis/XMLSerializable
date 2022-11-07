@@ -66,7 +66,7 @@ private:
 
 #define META_PROP_READONLY(type, name)                                      \
     private:                                                                \
-        type m_##name;                                                      \
+        type m_##name {};                                                   \
     public:                                                                 \
     PROP_GETTER(type, name)                                                 \
     META_PROP_INTERNAL(name)
